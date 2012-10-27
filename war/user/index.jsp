@@ -26,12 +26,9 @@ th,td {
 </style>
 
 <form action="create">
-  <p>
-    新規ユーザ名: <input type="text" name="name">
-  </p>
-  <p>
-    <input type="submit" value="登録する">
-  </p>
+  <p>新しいユーザの名前を入力してください。</p>
+  <p>名前: <input type="text" name="name"></p>
+  <p><input type="submit" value="登録する"></p>
 </form>
 
 <c:if test="${empty users}">

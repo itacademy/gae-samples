@@ -26,6 +26,7 @@ th,td {
 </style>
 
 <form action="create">
+  <p>登録する書籍の情報を入力してください。</p>
   <p>タイトル: <input type="text" name="title" value="${title}"></p>
   <p>著者名: <input type="text" name="author" value="${author}"></p>
   <p>価格: <input type="text" name="price" value="${price}"></p>
