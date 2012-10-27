@@ -11,31 +11,47 @@ form {
   border: solid 1px #999;
   padding: 0 10px;
 }
+
+#users {
+  border-collapse: collapse;
+}
+
+th,td {
+  padding: 5px;
+  border: solid 1px #999;
+}
+.number {
+  text-align: right;
+}
 </style>
 
 <form action="create">
-  <p>新規ユーザ名: <input type="text" name="name"></p>
-  <p><input type="submit" value="登録する"></p>
+  <p>
+    新規ユーザ名: <input type="text" name="name">
+  </p>
+  <p>
+    <input type="submit" value="登録する">
+  </p>
 </form>
 
 <c:if test="${empty users}">
-<p>ユーザがひとりも登録されていません</p>
+  <p>ユーザがひとりも登録されていません</p>
 </c:if>
 
 <c:if test="${not empty users}">
-<table id="users">
-  <tr>
-    <th>ID</th>
-    <th>名前</th>
-    <th>登録日時</th>
-  </tr>
-<c:forEach var="user" items="${users}">
-  <tr>
-    <td>${user.id}</td>
-    <td>${f:h(user.name)}</td>
-    <td><fmt:formatDate value="${user.createDate}" pattern="yyyy/MM/dd" /></td>
-  </tr>
-</c:forEach>
-</table>
+  <table id="users">
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>登録日時</th>
+    </tr>
+    <c:forEach var="user" items="${users}">
+      <tr>
+        <td class="number">${user.id}</td>
+        <td>${f:h(user.name)}</td>
+        <td><fmt:formatDate value="${user.createDate}" pattern="yyyy/MM/dd" /></td>
+      </tr>
+    </c:forEach>
+  </table>
 </c:if>
 
