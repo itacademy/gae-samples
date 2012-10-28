@@ -34,10 +34,18 @@ public class IndexController extends Controller {
     // コードはこちらのほうが読みやすいが、
     // どうせ両方取得するのなら、まとめて取得したほうが効率はよい。
     protected List<Todo> getUnfinishedTodos() {
-        return Datastore.query(m).filter(m.finishDate.equal(null)).asList();
+        return Datastore
+            .query(m)
+            .filter(m.finishDate.equal(null))
+            .sort(m.createDate.desc)
+            .asList();
     }
 
     protected List<Todo> getFinishedTodos() {
-        return Datastore.query(m).filter(m.finishDate.isNotNull()).asList();
+        return Datastore
+            .query(m)
+            .filter(m.finishDate.isNotNull())
+            .sort(m.finishDate.desc)
+            .asList();
     }
 }
