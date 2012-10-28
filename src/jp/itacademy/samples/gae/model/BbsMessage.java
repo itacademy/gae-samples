@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
+import org.slim3.util.HtmlUtil;
 
 import com.google.appengine.api.datastore.Key;
 
@@ -99,6 +100,10 @@ public class BbsMessage implements Serializable {
 
     public long getId() {
         return getKey().getId();
+    }
+    
+    public String getBodyHtml() {
+        return HtmlUtil.escape(getBody()).replaceAll("\\n", "<br>");
     }
 
     @Override
