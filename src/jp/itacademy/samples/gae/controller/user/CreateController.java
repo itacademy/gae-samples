@@ -16,15 +16,18 @@ public class CreateController extends Controller {
 
         Validators v = new Validators(request);
         v.add("name", v.required());
+        v.add("email", v.required());
 
         if (!v.validate()) {
             return forward("index");
         }
 
         String name = asString("name");
+        String email = asString("email");
 
         User user = new User();
         user.setName(name);
+        user.setEmail(email);
         user.setCreateDate(new Date());
         Datastore.put(user);
 
