@@ -32,6 +32,16 @@ public class Employee implements Serializable {
 
     private List<Long> credentialIds;
 
+    private int punishmentCount;
+
+    public int getPunishmentCount() {
+        return punishmentCount;
+    }
+
+    public void setPunishmentCount(int punishmentCount) {
+        this.punishmentCount = punishmentCount;
+    }
+
     @Attribute(persistent = false)
     private Dept dept;
 
