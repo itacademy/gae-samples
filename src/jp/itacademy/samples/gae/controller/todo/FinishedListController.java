@@ -9,7 +9,7 @@ import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 import org.slim3.datastore.Datastore;
 
-public class IndexController extends Controller {
+public class FinishedListController extends Controller {
 
     @Override
     public Navigation run() throws Exception {
@@ -17,11 +17,10 @@ public class IndexController extends Controller {
         List<Todo> todos =
             Datastore
                 .query(m)
-                .filter(m.finishDate.equal(null))
-                .sort(m.createDate.desc)
+                .filter(m.finishDate.notEqual(null))
+                .sort(m.finishDate.desc)
                 .asList();
         requestScope("todos", todos);
-        return forward("index.jsp");
+        return forward("finishedList.jsp");
     }
-
 }
