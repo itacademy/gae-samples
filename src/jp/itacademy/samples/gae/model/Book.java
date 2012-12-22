@@ -27,6 +27,8 @@ public class Book implements Serializable {
 
     private Date arrivalDate;
 
+    private boolean rented;
+
     public Book() {
     }
 
@@ -104,6 +106,14 @@ public class Book implements Serializable {
 
     public void setArrivalDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 
     // --

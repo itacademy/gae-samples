@@ -1,8 +1,9 @@
 package jp.itacademy.samples.gae.controller.library;
 
-import java.util.logging.Logger;
+import java.util.Date;
 
 import jp.itacademy.samples.gae.model.Book;
+import jp.itacademy.samples.gae.model.Lend;
 import jp.itacademy.samples.gae.model.User;
 
 import org.slim3.controller.Controller;
@@ -11,11 +12,9 @@ import org.slim3.controller.validator.Validators;
 import org.slim3.datastore.Datastore;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.Transaction;
 
 public class LendController extends Controller {
-
-    private static Logger logger = Logger.getLogger(LendController.class
-        .getName());
 
     @Override
     public Navigation run() throws Exception {
@@ -28,17 +27,33 @@ public class LendController extends Controller {
             return forward("index");
         }
 
-        long bookId = asLong("bookId");
         long userId = asLong("userId");
-        Key bookKey = Datastore.createKey(Book.class, bookId);
+        long bookId = asLong("bookId");
         Key userKey = Datastore.createKey(User.class, userId);
+        Key bookKey = Datastore.createKey(Book.class, bookId);
 
-        Book book = Datastore.getOrNull(Book.class, bookKey);
-        User user = Datastore.getOrNull(User.class, bookKey);
-        logger.fine("book: " + book + " / user: " + user);
-
-        if (book == null || user == null) {
+        User user = Datastore.getOrNull(User.class, userKey);
+        if (user == null) {
             return redirect("index");
+        }
+
+        Transaction tx = Datastore.beginTransaction();
+        try {
+            Book book = Datastore.getOrNull(Book.class, bookKey);
+            if (book == null) {
+                return redirect("index");
+            }
+            Lend lend = new Lend();
+            lend.setKey(Datastore.allocateId(bookKey, Lend.class));
+            lend.setUserId(userId);
+            lend.setLendingDate(new Date());
+            book.setRented(true);
+            Datastore.put(lend, book);
+            tx.commit();
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
         }
 
         return redirect("index");

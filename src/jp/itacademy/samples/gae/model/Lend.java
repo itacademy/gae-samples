@@ -30,10 +30,6 @@ public class Lend implements Serializable {
     public Lend() {
     }
 
-    private Lend(Book book, User user) {
-
-    }
-
     /**
      * Returns the key.
      * 
