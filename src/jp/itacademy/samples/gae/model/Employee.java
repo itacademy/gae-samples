@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.slim3.datastore.Attribute;
+import org.slim3.datastore.Datastore;
 import org.slim3.datastore.Model;
 
 import com.google.appengine.api.datastore.Key;
@@ -40,6 +41,16 @@ public class Employee implements Serializable {
 
     public void setPunishmentCount(int punishmentCount) {
         this.punishmentCount = punishmentCount;
+    }
+
+    public Employee() {
+
+    }
+
+    public Employee(long id, long deptId, String name) {
+        setKey(Datastore.createKey(Employee.class, id));
+        setDeptId(deptId);
+        setName(name);
     }
 
     @Attribute(persistent = false)
@@ -167,5 +178,13 @@ public class Employee implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Key getDeptKey() {
+        return Datastore.createKey(Dept.class, getDeptId());
+    }
+
+    public void setDeptKey(Key deptKey) {
+        this.deptId = deptKey.getId();
     }
 }

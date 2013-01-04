@@ -3,6 +3,7 @@ package jp.itacademy.samples.gae.model;
 import java.io.Serializable;
 
 import org.slim3.datastore.Attribute;
+import org.slim3.datastore.Datastore;
 import org.slim3.datastore.Model;
 
 import com.google.appengine.api.datastore.Key;
@@ -19,6 +20,14 @@ public class Dept implements Serializable {
     private Long version;
 
     public String name;
+    
+    public Dept() {
+    }
+    
+    public Dept(long id, String name) {
+        setKey(Datastore.createKey(Dept.class, id));
+        setName(name);
+    }
 
     /**
      * Returns the key.
