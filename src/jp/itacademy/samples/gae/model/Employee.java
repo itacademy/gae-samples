@@ -27,6 +27,8 @@ public class Employee implements Serializable {
 
     private long deptId;
 
+    private String deptName;
+
     private boolean training;
 
     private int salary;
@@ -50,6 +52,13 @@ public class Employee implements Serializable {
     public Employee(long id, long deptId, String name) {
         setKey(Datastore.createKey(Employee.class, id));
         setDeptId(deptId);
+        setName(name);
+    }
+
+    public Employee(long id, Dept dept, String name) {
+        setKey(Datastore.createKey(Employee.class, id));
+        setDeptKey(dept.getKey());
+        setDeptName(dept.getName());
         setName(name);
     }
 
@@ -124,6 +133,14 @@ public class Employee implements Serializable {
 
     public void setDeptId(long deptId) {
         this.deptId = deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     public boolean isTraining() {
