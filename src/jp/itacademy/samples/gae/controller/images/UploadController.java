@@ -1,7 +1,5 @@
 package jp.itacademy.samples.gae.controller.images;
 
-import java.util.Date;
-
 import jp.itacademy.samples.gae.model.ImageFile;
 
 import org.slim3.controller.Controller;
@@ -25,14 +23,14 @@ public class UploadController extends Controller {
             resize = asInteger("resize");
         } catch (Exception e) {
             // NumberFormatException, NullPointerException
-            // ãŒç™ºç”Ÿã™ã‚‹å¯èƒ½æ€§ãŒã‚ã‚‹ãŒã€ã©ã¡ã‚‰ã‚‚ç„¡è¦–ã™ã‚‹
+            // ‚ª”­¶‚·‚é‰Â”\«‚ª‚ ‚é‚ªA‚Ç‚¿‚ç‚à–³‹‚·‚é
         }
 
         Image image = ImagesServiceFactory.makeImage(file.getData());
         int w = image.getWidth() * resize / 100;
         int h = image.getHeight() * resize / 100;
         Transform transform = ImagesServiceFactory.makeResize(w, h);
-        ImagesServiceFactory
+        image = ImagesServiceFactory
             .getImagesService()
             .applyTransform(transform, image);
 
@@ -40,7 +38,6 @@ public class UploadController extends Controller {
         imageFile.setFileName(file.getFileName());
         imageFile.setContentType(file.getContentType());
         imageFile.setData(image.getImageData());
-        imageFile.setUploadDate(new Date());
         Datastore.put(imageFile);
 
         requestScope("imageFile", imageFile);

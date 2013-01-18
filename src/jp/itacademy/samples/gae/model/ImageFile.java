@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.slim3.datastore.Attribute;
+import org.slim3.datastore.CreationDate;
 import org.slim3.datastore.Model;
 
 import com.google.appengine.api.datastore.Key;
@@ -12,8 +13,13 @@ import com.google.appengine.api.datastore.Key;
 public class ImageFile implements Serializable {
 
     private String fileName;
+
     private String contentType;
+
+    @Attribute(lob = true)
     private byte[] data;
+
+    @Attribute(listener = CreationDate.class)
     private Date uploadDate;
 
     public String getFileName() {

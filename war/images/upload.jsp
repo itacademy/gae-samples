@@ -10,4 +10,4 @@
 
 <p>ファイル名: ${f:h(imageFile.fileName)}</p>
 <p>リサイズ: ${f:h(resize)}%</p>
-<p><img width="200" src="/images/get?id=${imageFile.key.id}"></p>
+<p><img src="/images/get?id=${imageFile.key.id}"></p>
