@@ -10,7 +10,7 @@ import org.slim3.datastore.Datastore;
 
 import com.google.appengine.api.datastore.Key;
 
-public class GetController extends BaseController {
+public class GetController extends AbstractImagesController {
 
     @Override
     public Navigation run() throws Exception {

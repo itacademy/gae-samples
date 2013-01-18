@@ -7,11 +7,11 @@ import org.slim3.controller.validator.Validators;
 
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesService.OutputEncoding;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.Transform;
-import com.google.appengine.api.images.ImagesService.OutputEncoding;
 
-public class RotateController extends BaseController {
+public class RotateController extends AbstractImagesController {
 
     @Override
     public Navigation run() throws Exception {
@@ -25,7 +25,8 @@ public class RotateController extends BaseController {
 
         int degree = asInteger("degree");
 
-        Image image = ImagesServiceFactory.makeImage(loadGaeImage());
+        Image image =
+            ImagesServiceFactory.makeImage(loadImage("/images/gae.png"));
         Transform transform = ImagesServiceFactory.makeRotate(degree);
 
         ImagesService service = ImagesServiceFactory.getImagesService();

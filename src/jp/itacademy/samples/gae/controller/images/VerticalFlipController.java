@@ -8,12 +8,13 @@ import com.google.appengine.api.images.ImagesService.OutputEncoding;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.Transform;
 
-public class VerticalFlipController extends BaseController {
+public class VerticalFlipController extends AbstractImagesController {
 
     @Override
     public Navigation run() throws Exception {
 
-        Image image = ImagesServiceFactory.makeImage(loadGaeImage());
+        Image image =
+            ImagesServiceFactory.makeImage(loadImage("/images/gae.png"));
         Transform transform = ImagesServiceFactory.makeVerticalFlip();
 
         ImagesService service = ImagesServiceFactory.getImagesService();

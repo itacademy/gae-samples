@@ -11,7 +11,7 @@ import com.google.appengine.api.images.ImagesService.OutputEncoding;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.Transform;
 
-public class ResizeController extends BaseController {
+public class ResizeController extends AbstractImagesController {
 
     @Override
     public Navigation run() throws Exception {
@@ -25,7 +25,8 @@ public class ResizeController extends BaseController {
 
         int rate = asInteger("rate");
 
-        Image image = ImagesServiceFactory.makeImage(loadGaeImage());
+        Image image =
+            ImagesServiceFactory.makeImage(loadImage("/images/gae.png"));
 
         int newWidth = image.getWidth() * rate / 100;
         int newHeight = image.getHeight() * rate / 100;

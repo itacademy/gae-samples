@@ -32,3 +32,8 @@
   <p class="caption">上下反転</p>
   <p class="img"><img src="/images/verticalFlip"></p>
 </div>
+
+<div>
+  <p class="caption">合成</p>
+  <p class="img"><img src="/images/composite"></p>
+</div>
